@@ -1,24 +1,21 @@
 #products {
-  display: inline-block;
+  float: left;
   width: 70%;
-  margin-top: 2rem;
-  margin-left: 2rem;
 }
 
 .product {
   background-color: #d5d5d5;
   float: left;
-  margin: .5rem;
+  margin: .25rem;
 }
 
 #form {
+  width: 30%;
   float: right;
 }
 
 #info {
-  width: 24%;
+  width: 30%;
   float: right;
-  margin-top: 5rem;
-  margin-right: 2rem;
-  border: solid #d5d5d5;
+  margin: auto;
 }

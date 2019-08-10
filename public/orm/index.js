@@ -2,11 +2,11 @@ const mysql = require('mysql')
 const config = require('../../config.json')
 
 const connection = mysql.createConnection({
-  host: config.host,
-  port: config.port,
-  user: config.username,
-  password: config.password,
-  database: config.db
+  host: config.host || process.env.host,
+  port: config.port || process.env.port,
+  user: config.username || process.env.username,
+  password: config.password || process.env.password,
+  database: config.db || process.env.database
 })
 
 const orm = {
@@ -26,33 +26,49 @@ const orm = {
     })
   },
 
-  insertInto: function (table, dataObj) {
-    // Create the actual query, set it to a variable
-    const queryString = 'INSERT INTO ?? (product_name, department_name, price, stock_quantity) VALUES (?)'
+  selectId: function (table, column, id) {
     return new Promise((resolve, reject) => {
-      // Make the query! Note, we use the variable we created INSTEAD of writing out the query
-      connection.query(queryString, [ table, dataObj ], (err, result) => {
-        // If there's an error, reject the promise and send the error back
+      const queryString = 'SELECT * FROM ?? WHERE ?? = ?'
+      connection.query(queryString, [ table, column, id ], (err, result) => {
         if (err) {
           return reject(err)
         }
-        // Remember, that return short-circuits the function. So if there is no error, just resolve the promise
         return resolve(result)
       })
     })
   },
 
-  delete: function (table, id) {
-    // Create the actual query, set it to a variable
-    const queryString = 'DELETE FROM ?? WHERE item_id = ?'
+  insertInto: function (table, dataObj) {
     return new Promise((resolve, reject) => {
-      // Make the query! Note, we use the variable we created INSTEAD of writing out the query
-      connection.query(queryString, [ table, id ], (err, result) => {
-        // If there's an error, reject the promise and send the error back
+      const queryString = 'INSERT INTO ?? (product_name, department_name, price, stock_quantity) VALUES (?)'
+      connection.query(queryString, [ table, dataObj ], (err, result) => {
         if (err) {
           return reject(err)
         }
-        // Remember, that return short-circuits the function. So if there is no error, just resolve the promise
+        return resolve(result)
+      })
+    })
+  },
+
+  delete: function (table, column, id) {
+    return new Promise((resolve, reject) => {
+      const queryString = 'DELETE FROM ?? WHERE ?? = ?'
+      connection.query(queryString, [ table, column, id ], (err, result) => {
+        if (err) {
+          return reject(err)
+        }
+        return resolve(result)
+      })
+    })
+  },
+
+  updateAmount: function (table, column, id, amount) {
+    return new Promise((resolve, reject) => {
+      const queryString = 'UPDATE ?? SET ?? = ? WHERE item_id = ?'
+      connection.query(queryString, [ table, column, amount, id ], (err, result, fields) => {
+        if (err) {
+          return reject(err)
+        }
         return resolve(result)
       })
     })
