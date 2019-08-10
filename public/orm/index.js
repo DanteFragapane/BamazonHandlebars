@@ -1,7 +1,7 @@
 const mysql = require('mysql')
 
 const config = {
-  host: process.env.host || 'localhost',
+  host: process.env.JAWSDB_URL || 'localhost',
   port: process.env.port || 3306,
   user: process.env.username || 'root',
   password: process.env.password || 'password',
