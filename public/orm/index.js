@@ -1,12 +1,12 @@
 const mysql = require('mysql')
-const config = require('../../config.json')
+// const config = require('../../config.json')
 
 const connection = mysql.createConnection({
-  host: config.host || process.env.host,
-  port: config.port || process.env.port,
-  user: config.username || process.env.username,
-  password: config.password || process.env.password,
-  database: config.db || process.env.database
+  host: process.env.host,
+  port: process.env.port,
+  user: process.env.username,
+  password: process.env.password,
+  database: process.env.database
 })
 
 const orm = {
