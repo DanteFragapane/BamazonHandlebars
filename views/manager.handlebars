@@ -20,7 +20,7 @@
       <h5>Price (Dollars): ${{this.price}}</h5>
       <h5>Stock: {{this.stock_quantity}}</h5>
       <button data-id="{{this.item_id}}" class="deleteButton">Delete Product!</button>
-      <a href="/{{this.id}}"><button data-productid="{{this.id}}" class="updatebutton">Update Product!</button></a>
+      <a href="/{{this.id}}"><button data-productid="{{this.item_id}}" class="restockButton">Restock Product!</button></a>
     </div>
   {{/each}}
 </div>

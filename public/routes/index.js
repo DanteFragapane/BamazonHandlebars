@@ -66,9 +66,21 @@ router.delete('/api/deleteproduct', (req, res) => {
     })
 })
 
-// Update a product
-router.put('/api/updateproduct:id', (req, res) => {})
+// Restock a product
+router.post('/api/restock', (req, res) => {
+  orm
+    .updateAmount('products', 'stock_quantity', req.body.productid, 100)
+    .then((result) => {
+      return res.status(200).send('Updated!')
+    })
+    .catch((err) => {
+      if (err) {
+        return res.status(500).send('Something broke while restocking!')
+      }
+    })
+})
 
+// Buy a product and reduce the stock number
 router.put('/api/buyproduct', (req, res) => {
   const { id, amount } = req.body
   orm
@@ -99,6 +111,7 @@ router.put('/api/buyproduct', (req, res) => {
     .catch((err) => {
       if (err) {
         console.error(err)
+        return res.status(500).send('Something broke!')
       }
     })
 })
