@@ -14,7 +14,6 @@ $('#addProduct').on('submit', (event) => {
     method: 'POST',
     data: { productName: productName, departmentName: departmentName, price: price, stockQuantity: stockQuantity }
   })
-  location.reload()
 })
 
 // Clicking the delete product button on the manager page
@@ -25,7 +24,6 @@ $('.deleteButton').click((event) => {
     method: 'DELETE',
     data: $(event.target).data()
   })
-  location.reload()
 })
 
 // Clicking the restock button
@@ -35,5 +33,4 @@ $('.restockButton').click((event) => {
     method: 'POST',
     data: $(event.target).data()
   })
-  location.reload()
 })

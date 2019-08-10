@@ -40,7 +40,7 @@ router.post('/api/addproduct', (req, res) => {
       if (result.affectedRows === 0) {
         res.status(404).send('Product not added!')
       }
-      res.redirect('/manager')
+      return res.status(200).redirect('/manager')
     })
     .catch((err) => {
       if (err) {
@@ -57,7 +57,7 @@ router.delete('/api/deleteproduct', (req, res) => {
       if (result.affectedRows === 0) {
         res.status(404).send('Product could not be deleted.')
       }
-      res.redirect('/manager')
+      return res.status(200).redirect('/manager')
     })
     .catch((err) => {
       if (err) {
@@ -71,7 +71,7 @@ router.post('/api/restock', (req, res) => {
   orm
     .updateAmount('products', 'stock_quantity', req.body.productid, 100)
     .then((result) => {
-      return res.status(200).send('Updated!')
+      return res.status(200).redirect('/manager')
     })
     .catch((err) => {
       if (err) {
@@ -100,6 +100,7 @@ router.put('/api/buyproduct', (req, res) => {
           if (data.affectedRows === 0) {
             return res.status(404).send('Unable to update product!')
           }
+          return res.status(200).redirect('/')
         })
         .catch((err) => {
           if (err) {
