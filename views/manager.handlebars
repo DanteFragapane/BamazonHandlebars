@@ -1,0 +1,30 @@
+<div id="form">
+  <form id="addProduct">
+    <label for="product_name">Name of product:</label> <br>
+    <input type="text" name="product_name" id="product_name"> <br> <br>
+    <label for="department_name">Department of product:</label> <br>
+    <input type="text" name="department_name" id="department_name"> <br> <br>
+    <label for="price">Price of product:<label> <br>
+    <input type="text" name="price" id="price"> <br> <br>
+    <label for="stock_quantity">Amount of product:</label> <br>
+    <input type="text" name="stock_quantity" id="stock_quantity"> <br> <br>
+    <button type="submit">Add the product!</button>
+  </form>
+</div>
+
+<div id="products">
+  {{#each products}}
+    <div class="product">
+      <h4>Product ID: {{this.item_id}}</h4>
+      <h5>Product Name: {{this.product_name}}</h5> 
+      <h5>Price (Dollars): ${{this.price}}</h5>
+      <h5>Stock: {{this.stock_quantity}}</h5>
+      <button data-id="{{this.item_id}}" class="deleteButton">Delete Product!</button>
+      <a href="/{{this.id}}"><button data-productid="{{this.id}}" class="updatebutton">Update Product!</button></a>
+    </div>
+  {{/each}}
+</div>
+
+
+{{!-- Import the script file --}}
+<script src="data/manager.js"></script>

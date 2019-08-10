@@ -1,0 +1,16 @@
+<div id="info">
+  <p>This website was designed to make purchasing items online even easier! Please, take a look around, </p>
+</div>
+
+<div id="products">
+  {{#each products}}
+    <div class="product">
+      <h4>Product ID: {{this.item_id}}</h4>
+      <h5>Product Name: {{this.product_name}}</h5> 
+      <h5>Price (Dollars): ${{this.price}}</h5>
+      <h5>Stock: {{this.stock_quantity}}</h5>
+      <input data-id="{{this.item_id}}" type="text" name="amount" class="buy">
+      <button data-id="{{this.item_id}}" class="buy">Buy!</button>
+    </div>
+  {{/each}}
+</div>
